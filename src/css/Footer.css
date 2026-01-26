@@ -1,0 +1,128 @@
+.footer {
+    background: linear-gradient(135deg, #0f3d2e, #145c43);
+    color: #eaeaea;
+    padding: 60px 0 30px;
+    font-size: 15px;
+}
+
+/* Brand */
+.footer-brand {
+    font-size: 28px;
+    font-weight: 800;
+    color: #9ef0c1;
+    letter-spacing: 1px;
+}
+
+.footer-tagline {
+    font-style: italic;
+    color: #c9f7dc;
+    margin-bottom: 10px;
+}
+
+.footer-text {
+    color: #dcdcdc;
+    line-height: 1.6;
+}
+
+/* Titles */
+.footer-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #ffffff;
+    position: relative;
+}
+
+.footer-title::after {
+    content: "";
+    width: 40px;
+    height: 3px;
+    background: #9ef0c1;
+    display: block;
+    margin-top: 6px;
+    border-radius: 10px;
+}
+
+/* Links */
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li {
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.footer-links li a {
+    color: #dcdcdc;
+    text-decoration: none;
+}
+
+.footer-links li:hover,
+.footer-links li a:hover {
+    color: #9ef0c1;
+    padding-left: 5px;
+}
+
+/* Contact */
+.footer-contact {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-contact li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.footer-contact a {
+    color: #dcdcdc;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: color 0.3s ease;
+}
+
+.footer-contact a:hover {
+    color: #9ef0c1;
+}
+
+/* Bottom */
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    margin-top: 40px;
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    font-size: 14px;
+    color: #cfcfcf;
+}
+
+.footer-bottom span {
+    color: #9ef0c1;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .footer {
+        text-align: center;
+    }
+
+    .footer-contact li {
+        justify-content: center;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+    }
+}

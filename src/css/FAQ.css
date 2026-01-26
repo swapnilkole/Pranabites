@@ -1,0 +1,72 @@
+/* Hero Section */
+.faq-hero {
+    background: linear-gradient(135deg, #b45309, #92400e);
+    color: white;
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.faq-hero h1 {
+    font-weight: 700;
+    font-size: 2.8rem;
+}
+
+.faq-hero p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+/* FAQ Accordion */
+.faq-item {
+    border: none;
+    margin-bottom: 15px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.accordion-button {
+    font-weight: 600;
+    padding: 18px;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: #fff3e0;
+    color: #92400e;
+}
+
+/* WhatsApp CTA */
+.faq-whatsapp {
+    background: linear-gradient(135deg, #16a34a, #15803d);
+    text-align: center;
+    color: white;
+    padding: 70px 20px;
+}
+
+.whatsapp-btn {
+    background-color: white;
+    color: #15803d;
+    font-weight: 600;
+    border-radius: 30px;
+    padding: 12px 30px;
+    border: none;
+}
+
+.whatsapp-btn:hover {
+    background-color: #f0fdf4;
+}
+
+/* Quick Links */
+.quick-card {
+    text-align: center;
+    border: none;
+    border-radius: 16px;
+    padding: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.quick-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}

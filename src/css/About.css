@@ -1,0 +1,73 @@
+.about-hero {
+    background: linear-gradient(90deg, #b45309, #78350f);
+    color: white;
+    padding: 100px 0;
+}
+
+.about-hero h1 {
+    font-size: 3rem;
+    font-weight: 700;
+}
+
+.about-hero p {
+    font-size: 1.25rem;
+    color: #fde68a;
+}
+
+.section-title {
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.story-img {
+    max-height: 420px;
+    object-fit: cover;
+    width: 100%;
+}
+
+.values-section {
+    background: #ffffff;
+    padding: 80px 0;
+}
+
+.value-card {
+    padding: 30px;
+    border: none;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease;
+    height: 100%;
+}
+
+.value-card:hover {
+    transform: translateY(-8px);
+}
+
+.value-icon {
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+.text-purple {
+    color: #7c3aed;
+}
+
+.mission-text {
+    max-width: 700px;
+    margin: auto;
+    font-size: 1.1rem;
+}
+
+.mission-badge {
+    display: inline-block;
+    background: #fde68a;
+    color: #78350f;
+    padding: 15px 30px;
+    border-radius: 30px;
+    font-weight: 600;
+    margin-top: 20px;
+}
+
+.choose-us {
+    background: linear-gradient(90deg, #b45309, #78350f);
+    padding: 80px 0;
+}
