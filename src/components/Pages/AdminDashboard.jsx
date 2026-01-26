@@ -21,6 +21,7 @@ const AdminDashboard = () => {
     const [admin, setAdmin] = useState(null);
     const [products, setProducts] = useState([]);
     const [orders, setOrders] = useState([]);
+    const [users, setUsers] = useState([]);
     const [showEditModal, setShowEditModal] = useState(false);
     const [editingProduct, setEditingProduct] = useState(null);
     const [activeTab, setActiveTab] = useState("overview");
@@ -41,6 +42,10 @@ const AdminDashboard = () => {
         // Load orders (simulated)
         const savedOrders = JSON.parse(localStorage.getItem("adminOrders")) || [];
         setOrders(savedOrders);
+
+        // Load registered users
+        const registeredUsers = JSON.parse(localStorage.getItem("registeredUsers")) || [];
+        setUsers(registeredUsers);
     }, [navigate]);
 
     const handleLogout = () => {
@@ -151,8 +156,8 @@ const AdminDashboard = () => {
                                     <FaUsers size={24} className="text-warning" />
                                 </div>
                                 <div>
-                                    <h3 className="mb-0 fw-bold">{totalOrders}</h3>
-                                    <small className="text-muted">Total Orders</small>
+                                    <h3 className="mb-0 fw-bold">{users.length}</h3>
+                                    <small className="text-muted">Registered Users</small>
                                 </div>
                             </Card.Body>
                         </Card>
@@ -275,6 +280,47 @@ const AdminDashboard = () => {
                                             </tbody>
                                         </Table>
                                     </div>
+                                </div>
+                            </Tab>
+
+                            <Tab eventKey="users" title="Users">
+                                <div className="py-3">
+                                    <h5 className="fw-bold mb-3">Registered Users</h5>
+                                    {users.length === 0 ? (
+                                        <div className="text-center py-5 text-muted">
+                                            <FaUsers size={48} className="mb-3 opacity-50" />
+                                            <p>No users registered yet.</p>
+                                        </div>
+                                    ) : (
+                                        <div className="table-responsive">
+                                            <Table hover className="align-middle">
+                                                <thead className="bg-light">
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Name</th>
+                                                        <th>Email</th>
+                                                        <th>Phone</th>
+                                                        <th>Registered</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {users.map((user, index) => (
+                                                        <tr key={user.id || index}>
+                                                            <td>{index + 1}</td>
+                                                            <td className="fw-semibold">{user.name}</td>
+                                                            <td>{user.email}</td>
+                                                            <td>{user.phone}</td>
+                                                            <td>
+                                                                {user.createdAt
+                                                                    ? new Date(user.createdAt).toLocaleDateString()
+                                                                    : "N/A"}
+                                                            </td>
+                                                        </tr>
+                                                    ))}
+                                                </tbody>
+                                            </Table>
+                                        </div>
+                                    )}
                                 </div>
                             </Tab>
 

@@ -59,23 +59,50 @@ const AuthForm = () => {
         setIsSubmitting(true);
 
         try {
+            // Get all registered users
+            const registeredUsers = JSON.parse(localStorage.getItem("registeredUsers")) || [];
+
             if (isLogin) {
-                const storedUser = JSON.parse(localStorage.getItem("user"));
-                if (storedUser && storedUser.email === userData.email.trim().toLowerCase() && storedUser.password === userData.password) {
-                    toast.success(`Welcome back, ${storedUser.name}!`);
+                // Find user by email and password
+                const foundUser = registeredUsers.find(
+                    (u) => u.email === userData.email.trim().toLowerCase() && u.password === userData.password
+                );
+
+                if (foundUser) {
+                    // Set as current logged-in user
+                    localStorage.setItem("user", JSON.stringify(foundUser));
+                    toast.success(`Welcome back, ${foundUser.name}!`);
                     window.dispatchEvent(new Event("userUpdated"));
                     navigate("/shop");
                 } else {
-                    toast.error("Invalid email or password. Please try again or register.");
-                    setIsLogin(false);
+                    toast.error("Invalid email or password. Please check your credentials or register.");
                 }
             } else {
+                // Check if email already exists
+                const emailExists = registeredUsers.some(
+                    (u) => u.email === userData.email.trim().toLowerCase()
+                );
+
+                if (emailExists) {
+                    toast.error("This email is already registered. Please login instead.");
+                    setIsLogin(true);
+                    return;
+                }
+
                 const newUser = {
+                    id: Date.now(),
                     name: userData.name.trim(),
                     email: userData.email.trim().toLowerCase(),
                     phone: userData.phone.trim(),
                     password: userData.password,
+                    createdAt: new Date().toISOString(),
                 };
+
+                // Add to registered users list
+                registeredUsers.push(newUser);
+                localStorage.setItem("registeredUsers", JSON.stringify(registeredUsers));
+
+                // Set as current logged-in user
                 localStorage.setItem("user", JSON.stringify(newUser));
                 toast.success("Registered successfully! You are now logged in.");
                 window.dispatchEvent(new Event("userUpdated"));
