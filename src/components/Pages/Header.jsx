@@ -2,7 +2,9 @@ import { useState, useEffect, useCallback } from "react";
 import { Navbar, Nav, Container, Button, Badge } from "react-bootstrap";
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import { FaShoppingCart, FaUser } from "react-icons/fa";
-import logo from "../../../public/Images/logo1.jpg";
+
+// Logo from public folder - use direct path for Vite
+const logo = "/Images/Logo1.jpg";
 
 const Header = () => {
     const [user, setUser] = useState(null);
