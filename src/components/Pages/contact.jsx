@@ -2,7 +2,7 @@ import { Container, Row, Col, Card, Button, Form } from "react-bootstrap";
 import { MapPin, MessageCircle, Instagram, Clock, Phone } from "lucide-react";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import "../../css/Contact.css";
+import "../../css/contact.css";
 import SEO, { generateLocalBusinessSchema } from "../SEO";
 
 export default function Contact() {
