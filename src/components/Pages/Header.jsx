@@ -59,6 +59,7 @@ const Header = () => {
 
     const handleLogout = () => {
         localStorage.removeItem("user");
+        localStorage.removeItem("token");
         setUser(null);
         window.dispatchEvent(new Event("userUpdated"));
         navigate("/login");
