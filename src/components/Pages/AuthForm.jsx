@@ -51,7 +51,7 @@ const AuthForm = () => {
         return true;
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (!validateForm()) return;
@@ -59,57 +59,35 @@ const AuthForm = () => {
         setIsSubmitting(true);
 
         try {
-            // Get all registered users
-            const registeredUsers = JSON.parse(localStorage.getItem("registeredUsers")) || [];
+            const endpoint = isLogin ? "/api/login" : "/api/register";
+            const body = isLogin
+                ? { email: userData.email, password: userData.password }
+                : { name: userData.name, email: userData.email, phone: userData.phone, password: userData.password };
 
-            if (isLogin) {
-                // Find user by email and password
-                const foundUser = registeredUsers.find(
-                    (u) => u.email === userData.email.trim().toLowerCase() && u.password === userData.password
-                );
+            const response = await fetch(endpoint, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(body),
+            });
 
-                if (foundUser) {
-                    // Set as current logged-in user
-                    localStorage.setItem("user", JSON.stringify(foundUser));
-                    toast.success(`Welcome back, ${foundUser.name}!`);
-                    window.dispatchEvent(new Event("userUpdated"));
-                    navigate("/shop");
-                } else {
-                    toast.error("Invalid email or password. Please check your credentials or register.");
-                }
-            } else {
-                // Check if email already exists
-                const emailExists = registeredUsers.some(
-                    (u) => u.email === userData.email.trim().toLowerCase()
-                );
+            const data = await response.json();
 
-                if (emailExists) {
-                    toast.error("This email is already registered. Please login instead.");
+            if (!response.ok) {
+                toast.error(data.error || "Something went wrong");
+                if (response.status === 409) {
                     setIsLogin(true);
-                    return;
                 }
-
-                const newUser = {
-                    id: Date.now(),
-                    name: userData.name.trim(),
-                    email: userData.email.trim().toLowerCase(),
-                    phone: userData.phone.trim(),
-                    password: userData.password,
-                    createdAt: new Date().toISOString(),
-                };
-
-                // Add to registered users list
-                registeredUsers.push(newUser);
-                localStorage.setItem("registeredUsers", JSON.stringify(registeredUsers));
-
-                // Set as current logged-in user
-                localStorage.setItem("user", JSON.stringify(newUser));
-                toast.success("Registered successfully! You are now logged in.");
-                window.dispatchEvent(new Event("userUpdated"));
-                navigate("/shop");
+                return;
             }
+
+            // Store token and user in localStorage
+            localStorage.setItem("token", data.token);
+            localStorage.setItem("user", JSON.stringify(data.user));
+            toast.success(data.message);
+            window.dispatchEvent(new Event("userUpdated"));
+            navigate("/shop");
         } catch (err) {
-            toast.error("Something went wrong. Please try again.");
+            toast.error("Network error. Please try again.");
             console.error("Auth error:", err);
         } finally {
             setIsSubmitting(false);

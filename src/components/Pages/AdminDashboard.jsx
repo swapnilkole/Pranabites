@@ -26,10 +26,11 @@ const AdminDashboard = () => {
     const [editingProduct, setEditingProduct] = useState(null);
     const [activeTab, setActiveTab] = useState("overview");
 
-    // Check admin authentication
+    // Check admin authentication and load data
     useEffect(() => {
         const adminUser = JSON.parse(localStorage.getItem("adminUser"));
-        if (!adminUser) {
+        const adminToken = localStorage.getItem("adminToken");
+        if (!adminUser || !adminToken) {
             navigate("/admin");
             return;
         }
@@ -43,13 +44,29 @@ const AdminDashboard = () => {
         const savedOrders = JSON.parse(localStorage.getItem("adminOrders")) || [];
         setOrders(savedOrders);
 
-        // Load registered users
-        const registeredUsers = JSON.parse(localStorage.getItem("registeredUsers")) || [];
-        setUsers(registeredUsers);
+        // Fetch registered users from API
+        const fetchUsers = async () => {
+            try {
+                const response = await fetch("/api/admin/users", {
+                    headers: { Authorization: `Bearer ${adminToken}` },
+                });
+                if (response.ok) {
+                    const data = await response.json();
+                    setUsers(data.users || []);
+                }
+            } catch (err) {
+                console.error("Failed to fetch users:", err);
+                // Fallback to localStorage
+                const registeredUsers = JSON.parse(localStorage.getItem("registeredUsers")) || [];
+                setUsers(registeredUsers);
+            }
+        };
+        fetchUsers();
     }, [navigate]);
 
     const handleLogout = () => {
         localStorage.removeItem("adminUser");
+        localStorage.removeItem("adminToken");
         toast.success("Logged out successfully");
         navigate("/admin");
     };

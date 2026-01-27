@@ -4,10 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { FaLock, FaUserShield } from "react-icons/fa";
 import SEO from "../SEO";
 
-// Admin credentials (hardcoded - no registration)
-const ADMIN_EMAIL = "swapnilkole16@gmail.com";
-const ADMIN_PASSWORD = "Swapnil#8015PP";
-
 const AdminLogin = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
@@ -15,26 +11,34 @@ const AdminLogin = () => {
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
 
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
         setError("");
         setLoading(true);
 
-        // Simulate small delay for UX
-        setTimeout(() => {
-            if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
-                // Store admin session
-                localStorage.setItem("adminUser", JSON.stringify({
-                    email: ADMIN_EMAIL,
-                    role: "admin",
-                    loginTime: new Date().toISOString()
-                }));
-                navigate("/admin/dashboard");
-            } else {
-                setError("Invalid email or password");
+        try {
+            const response = await fetch("/api/admin/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email, password }),
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                setError(data.error || "Invalid email or password");
+                return;
             }
+
+            localStorage.setItem("adminToken", data.token);
+            localStorage.setItem("adminUser", JSON.stringify(data.admin));
+            navigate("/admin/dashboard");
+        } catch (err) {
+            setError("Network error. Please try again.");
+            console.error("Admin login error:", err);
+        } finally {
             setLoading(false);
-        }, 500);
+        }
     };
 
     return (
@@ -48,7 +52,6 @@ const AdminLogin = () => {
                 <div className="d-flex justify-content-center align-items-center">
                     <Card className="shadow-lg border-0" style={{ maxWidth: "420px", width: "100%" }}>
                         <Card.Body className="p-4 p-md-5">
-                            {/* Header */}
                             <div className="text-center mb-4">
                                 <div
                                     className="bg-success bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
@@ -60,14 +63,12 @@ const AdminLogin = () => {
                                 <p className="text-muted small">PranaBites Management Portal</p>
                             </div>
 
-                            {/* Error Alert */}
                             {error && (
                                 <Alert variant="danger" className="py-2">
                                     {error}
                                 </Alert>
                             )}
 
-                            {/* Login Form */}
                             <Form onSubmit={handleLogin}>
                                 <Form.Group className="mb-3">
                                     <Form.Label className="fw-semibold">Email Address</Form.Label>
@@ -113,7 +114,6 @@ const AdminLogin = () => {
                                 </Button>
                             </Form>
 
-                            {/* Footer Note */}
                             <div className="text-center mt-4">
                                 <small className="text-muted">
                                     Authorized personnel only

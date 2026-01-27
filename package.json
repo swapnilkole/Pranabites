@@ -10,8 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "bcryptjs": "^3.0.3",
     "bootstrap": "^5.3.8",
+    "jsonwebtoken": "^9.0.3",
     "lucide-react": "^0.561.0",
+    "mongodb": "^7.0.0",
     "react": "^19.2.0",
     "react-bootstrap": "^2.10.10",
     "react-dom": "^19.2.0",
