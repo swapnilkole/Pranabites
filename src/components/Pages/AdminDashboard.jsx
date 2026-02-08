@@ -7,13 +7,20 @@ import SEO from "../SEO";
 
 // Default products data
 const defaultProducts = [
-    { id: 1, name: "Almond Coco Dust (Badam)", category: "Dry Fruits", prices: { "200g": 305, "250g": 345 }, status: "active" },
-    { id: 2, name: "Whole Cashew (Kaju)", category: "Dry Fruits", prices: { "200g": 306, "250g": 365 }, status: "active" },
-    { id: 3, name: "Cashew Cheese & Herbs (Kaju)", category: "Dry Fruits", prices: { "200g": 347, "250g": 414 }, status: "active" },
-    { id: 4, name: "Raisin Milk (Kishmish)", category: "Dry Fruits", prices: { "200g": 252, "250g": 295 }, status: "active" },
-    { id: 5, name: "Pistachios (Pista)", category: "Dry Fruits", prices: { "200g": 365, "250g": 432 }, status: "active" },
-    { id: 6, name: "Almond Barbeque (Badam)", category: "Dry Fruits", prices: { "200g": 325, "250g": 387 }, status: "active" },
-    { id: 7, name: "Snack Mix Peri Peri", category: "Nuts", prices: { "200g": 288, "250g": 345 }, status: "active" },
+    { id: 1, name: "Almond Coco Dust", category: "Almond", prices: { "100g": 155, "250g": 350 }, status: "active" },
+    { id: 2, name: "Almond Hing Jeera", category: "Almond", prices: { "100g": 177, "250g": 400 }, status: "active" },
+    { id: 3, name: "American Almond", category: "Almond", prices: {}, status: "out_of_stock" },
+    { id: 4, name: "Cheese & Herb Cashew", category: "Cashew", prices: { "100g": 185, "250g": 419 }, status: "active" },
+    { id: 5, name: "Kokan Cashew", category: "Cashew", prices: { "100g": 165, "250g": 359 }, status: "active" },
+    { id: 6, name: "Raisin Milk", category: "Raisin", prices: { "100g": 128, "250g": 288 }, status: "active" },
+    { id: 7, name: "Raisin Normal", category: "Raisin", prices: {}, status: "out_of_stock" },
+    { id: 8, name: "Raisin Black", category: "Raisin", prices: {}, status: "out_of_stock" },
+    { id: 9, name: "Pista", category: "Pista", prices: { "100g": 185, "250g": 409 }, status: "active" },
+    { id: 10, name: "Mix Peri Peri Snack", category: "Snacks", prices: { "100g": 149, "250g": 329 }, status: "active" },
+    { id: 11, name: "Panchmeva", category: "Panchmeva", prices: { "250g": 359 }, status: "active" },
+    { id: 12, name: "Trail Pack (5 x 50g)", category: "Combo", prices: { "5x50g": 465 }, status: "active" },
+    { id: 13, name: "Mix Peri Peri & Panchmeva Combo", category: "Combo", prices: { "2x250g": 709 }, status: "active" },
+    { id: 14, name: "Pack of 2 Panchmeva", category: "Combo", prices: { "2x250g": 699 }, status: "active" },
 ];
 
 const AdminDashboard = () => {
@@ -98,7 +105,7 @@ const AdminDashboard = () => {
     const toggleProductStatus = (productId) => {
         const updatedProducts = products.map(p =>
             p.id === productId
-                ? { ...p, status: p.status === "active" ? "inactive" : "active" }
+                ? { ...p, status: p.status === "active" ? "out_of_stock" : "active" }
                 : p
         );
         setProducts(updatedProducts);
@@ -252,7 +259,7 @@ const AdminDashboard = () => {
                                                     <th>#</th>
                                                     <th>Product Name</th>
                                                     <th>Category</th>
-                                                    <th>200g Price</th>
+                                                    <th>100g Price</th>
                                                     <th>250g Price</th>
                                                     <th>Status</th>
                                                     <th>Actions</th>
@@ -264,8 +271,8 @@ const AdminDashboard = () => {
                                                         <td>{index + 1}</td>
                                                         <td className="fw-semibold">{product.name}</td>
                                                         <td>{product.category}</td>
-                                                        <td>{product.prices["200g"]}</td>
-                                                        <td>{product.prices["250g"]}</td>
+                                                        <td>{product.prices["100g"] || product.prices["5x50g"] || product.prices["2x250g"] || "—"}</td>
+                                                        <td>{product.prices["250g"] || "—"}</td>
                                                         <td>
                                                             <Badge
                                                                 bg={product.status === "active" ? "success" : "secondary"}
@@ -415,24 +422,30 @@ const AdminDashboard = () => {
                                         category: e.target.value
                                     })}
                                 >
-                                    <option value="Dry Fruits">Dry Fruits</option>
-                                    <option value="Nuts">Nuts</option>
+                                    <option value="Almond">Almond</option>
+                                    <option value="Cashew">Cashew</option>
+                                    <option value="Raisin">Raisin</option>
+                                    <option value="Pista">Pista</option>
+                                    <option value="Snacks">Snacks</option>
+                                    <option value="Panchmeva">Panchmeva</option>
+                                    <option value="Combo">Combo</option>
                                 </Form.Select>
                             </Form.Group>
                             <Row>
                                 <Col>
                                     <Form.Group className="mb-3">
-                                        <Form.Label>200g Price</Form.Label>
+                                        <Form.Label>100g Price</Form.Label>
                                         <Form.Control
                                             type="number"
-                                            value={editingProduct.prices["200g"]}
+                                            value={editingProduct.prices["100g"] || ""}
                                             onChange={(e) => setEditingProduct({
                                                 ...editingProduct,
                                                 prices: {
                                                     ...editingProduct.prices,
-                                                    "200g": parseInt(e.target.value) || 0
+                                                    "100g": parseInt(e.target.value) || 0
                                                 }
                                             })}
+                                            placeholder="Leave empty if N/A"
                                         />
                                     </Form.Group>
                                 </Col>
@@ -441,7 +454,7 @@ const AdminDashboard = () => {
                                         <Form.Label>250g Price</Form.Label>
                                         <Form.Control
                                             type="number"
-                                            value={editingProduct.prices["250g"]}
+                                            value={editingProduct.prices["250g"] || ""}
                                             onChange={(e) => setEditingProduct({
                                                 ...editingProduct,
                                                 prices: {
@@ -449,6 +462,7 @@ const AdminDashboard = () => {
                                                     "250g": parseInt(e.target.value) || 0
                                                 }
                                             })}
+                                            placeholder="Leave empty if N/A"
                                         />
                                     </Form.Group>
                                 </Col>

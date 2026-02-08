@@ -16,24 +16,30 @@ import { StarDisplay } from "../ProductReviews";
 const featuredProducts = [
     {
         id: 1,
-        name: "Almond Coco Dust (Badam)",
+        name: "Almond Coco Dust",
         flavor: "Coconut Dusted",
-        price: 305,
-        image: "/Images/simpl alm.jpg",
+        listingPrice: 175,
+        sellingPrice: 155,
+        weight: "100g",
+        image: "/Images/Almond Coco Dust Front.jpeg",
     },
     {
         id: 2,
-        name: "Whole Cashew (Kaju)",
-        flavor: "Natural Roasted",
-        price: 306,
-        image: "/Images/simpl cash.jpg",
+        name: "Cheese & Herb Cashew",
+        flavor: "Cheese & Herbs",
+        listingPrice: 205,
+        sellingPrice: 185,
+        weight: "100g",
+        image: "/Images/Cashew Chesse & Herbs Front.jpeg",
     },
     {
         id: 3,
-        name: "Snack Mix Peri Peri",
+        name: "Mix Peri Peri Snack",
         flavor: "Peri Peri Spiced",
-        price: 288,
-        image: "/Images/mix peri.jpg",
+        listingPrice: 170,
+        sellingPrice: 149,
+        weight: "100g",
+        image: "/Images/Mix Periperi Front.jpeg",
     },
 ];
 
@@ -54,8 +60,8 @@ const categories = [
         video: "https://www.pexels.com/download/video/8581284/",
     },
     {
-        name: "Pistachios",
-        description: "Salted premium pista",
+        name: "Combos",
+        description: "Value combo packs",
         video: "https://www.pexels.com/download/video/35114260/",
     },
 ];
@@ -139,12 +145,20 @@ export default function Home() {
                                             <h3 className="h5 mb-1">{product.name}</h3>
                                             <p className="text-muted small mb-2">{product.flavor}</p>
 
-                                            <p className="fw-bold fs-4 mb-1 text-dark">
-                                                ₹{product.price}
+                                            <p className="mb-1">
+                                                <small className="text-muted text-decoration-line-through me-1">
+                                                    ₹{product.listingPrice}
+                                                </small>
+                                                <span className="fw-bold fs-4 text-dark">
+                                                    ₹{product.sellingPrice}
+                                                </span>
+                                                <span className="badge bg-danger ms-2" style={{ fontSize: "0.7rem" }}>
+                                                    {Math.round(((product.listingPrice - product.sellingPrice) / product.listingPrice) * 100)}% OFF
+                                                </span>
                                             </p>
 
-                                            <p className="text-success fw-semibold small mb-1">
-                                                Save up to 10%
+                                            <p className="text-muted small mb-1">
+                                                {product.weight}
                                             </p>
 
                                             <p className="text-muted small mb-2">

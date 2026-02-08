@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Container, Row, Col, Card, Button, Carousel, Badge } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
@@ -7,66 +7,180 @@ import SEO, { generateProductListSchema } from "../SEO";
 import { StarDisplay } from "../ProductReviews";
 import ProductDetail from "../ProductDetail";
 
-// Calculate fake MRP for visual "10% OFF" display only
-const calculateMRP = (price) => Math.ceil((price / 0.9) / 5) * 5;
-
 const products = [
     {
-        category: "Dry Fruits",
+        category: "Almond",
         items: [
             {
-                name: "Almond Coco Dust (Badam)",
+                name: "Almond Coco Dust",
                 flavor: "Coconut Dusted",
-                prices: { "200g": 305, "250g": 345 },
-                images: ["/Images/simpl alm.jpg", "/Images/Almond Front.jpeg"],
-                keywords: "almonds, badam, coconut flavor, healthy snack",
+                prices: {
+                    "100g": { listing: 175, selling: 155 },
+                    "250g": { listing: 390, selling: 350 },
+                },
+                images: ["/Images/Almond Coco Dust Front.jpeg", "/Images/cocodust.jpg"],
+                inStock: true,
+                keywords: "almonds, badam, coconut, cocodust, healthy snack",
             },
             {
-                name: "Whole Cashew (Kaju)",
-                flavor: "Natural Roasted",
-                prices: { "200g": 306, "250g": 365 },
-                images: ["/Images/simpl cash.jpg", "/Images/Cashew Front.jpeg"],
-                keywords: "cashews, kaju, roasted, premium nuts",
+                name: "Almond Hing Jeera",
+                flavor: "Hing Jeera Spiced",
+                prices: {
+                    "100g": { listing: 200, selling: 177 },
+                    "250g": { listing: 450, selling: 400 },
+                },
+                images: ["/Images/Almond Hing Jeera Front.jpeg", "/Images/almond hing jeera.jpg"],
+                inStock: true,
+                keywords: "almonds, badam, hing, jeera, spicy, savory",
             },
             {
-                name: "Cashew Cheese & Herbs (Kaju)",
-                flavor: "Cheese & Herbs",
-                prices: { "200g": 347, "250g": 414 },
-                images: ["/Images/cheese cash.jpg", "/Images/Cashew Chesse & Herbs Front.jpeg"],
-                keywords: "cashews, cheese flavor, herbs, savory snack",
-            },
-            {
-                name: "Raisin Milk (Kishmish)",
-                flavor: "Milk Chocolate",
-                prices: { "200g": 252, "250g": 295 },
-                images: ["/Images/Milk Rais.jpg", "/Images/Choculate Raisin Milk Front.jpeg"],
-                keywords: "raisins, kishmish, chocolate, sweet snack",
-            },
-            {
-                name: "Pistachios (Pista)",
-                flavor: "Salted Premium",
-                prices: { "200g": 365, "250g": 432 },
-                images: ["/Images/s.jpg", "/Images/Pista Front.jpeg"],
-                keywords: "pistachios, pista, salted, premium nuts",
-            },
-            {
-                name: "Almond Barbeque (Badam)",
-                flavor: "BBQ Spiced",
-                prices: { "200g": 325, "250g": 387 },
-                images: ["/Images/BBQ.jpg", "/Images/Almond BBQ Front.jpeg"],
-                keywords: "almonds, badam, barbeque, spicy snack",
+                name: "American Almond",
+                flavor: "Classic Premium",
+                prices: {},
+                images: ["/Images/Almond Front.jpeg", "/Images/Almonds.jpg"],
+                inStock: false,
+                keywords: "almonds, american, premium, plain",
             },
         ],
     },
     {
-        category: "Nuts",
+        category: "Cashew",
         items: [
             {
-                name: "Snack Mix Peri Peri",
+                name: "Cheese & Herb Cashew",
+                flavor: "Cheese & Herbs",
+                prices: {
+                    "100g": { listing: 205, selling: 185 },
+                    "250g": { listing: 470, selling: 419 },
+                },
+                images: ["/Images/Cashew Chesse & Herbs Front.jpeg", "/Images/cashew cheese & herb.jpg"],
+                inStock: true,
+                keywords: "cashews, kaju, cheese, herbs, savory snack",
+            },
+            {
+                name: "Kokan Cashew",
+                flavor: "Natural Roasted",
+                prices: {
+                    "100g": { listing: 190, selling: 165 },
+                    "250g": { listing: 400, selling: 359 },
+                },
+                images: ["/Images/Cashew Front.jpeg", "/Images/simpl cash.jpg"],
+                inStock: true,
+                keywords: "cashews, kaju, kokan, roasted, premium",
+            },
+        ],
+    },
+    {
+        category: "Raisin",
+        items: [
+            {
+                name: "Raisin Milk",
+                flavor: "Milk Chocolate Coated",
+                prices: {
+                    "100g": { listing: 145, selling: 128 },
+                    "250g": { listing: 325, selling: 288 },
+                },
+                images: ["/Images/Choculate Raisin Milk Front.jpeg", "/Images/Milk Rais.jpg"],
+                inStock: true,
+                keywords: "raisins, kishmish, chocolate, milk, sweet",
+            },
+            {
+                name: "Raisin Normal",
+                flavor: "Classic Green Raisin",
+                prices: {},
+                images: ["/Images/raisins.jpg"],
+                inStock: false,
+                keywords: "raisins, kishmish, green, normal",
+            },
+            {
+                name: "Raisin Black",
+                flavor: "Premium Black Raisin",
+                prices: {},
+                images: ["/Images/raisins.jpg"],
+                inStock: false,
+                keywords: "raisins, kishmish, black, premium",
+            },
+        ],
+    },
+    {
+        category: "Pista",
+        items: [
+            {
+                name: "Pista",
+                flavor: "Salted Premium",
+                prices: {
+                    "100g": { listing: 210, selling: 185 },
+                    "250g": { listing: 460, selling: 409 },
+                },
+                images: ["/Images/Pista Front.jpeg", "/Images/pista.jpg"],
+                inStock: true,
+                keywords: "pistachios, pista, salted, premium nuts",
+            },
+        ],
+    },
+    {
+        category: "Snacks",
+        items: [
+            {
+                name: "Mix Peri Peri Snack",
                 flavor: "Peri Peri Spiced",
-                prices: { "200g": 288, "250g": 345 },
-                images: ["/Images/mix peri.jpg", "/Images/Mix Periperi Front.jpeg"],
+                prices: {
+                    "100g": { listing: 170, selling: 149 },
+                    "250g": { listing: 370, selling: 329 },
+                },
+                images: ["/Images/Mix Periperi Front.jpeg", "/Images/mix peri.jpg"],
+                inStock: true,
                 keywords: "snack mix, peri peri, spicy, mixed nuts",
+            },
+        ],
+    },
+    {
+        category: "Panchmeva",
+        items: [
+            {
+                name: "Panchmeva",
+                flavor: "Traditional Dry Fruit Mix",
+                prices: {
+                    "250g": { listing: 390, selling: 359 },
+                },
+                images: ["/Images/9ab2aff8ca40244650e36d1fc3546628.jpg"],
+                inStock: true,
+                keywords: "panchmeva, dry fruit mix, traditional, pooja",
+            },
+        ],
+    },
+    {
+        category: "Combo",
+        items: [
+            {
+                name: "Trail Pack (5 x 50g)",
+                flavor: "Almond Cocodust, Almond Hing Jeera, Cashew Cheese & Herb, Raisin Milk, Mix Peri Peri",
+                prices: {
+                    "5 x 50g": { listing: 520, selling: 465 },
+                },
+                images: ["/Images/Almond Coco Dust Front.jpeg", "/Images/Mix Periperi Front.jpeg"],
+                inStock: true,
+                keywords: "trail pack, combo, sampler, variety pack",
+            },
+            {
+                name: "Mix Peri Peri & Panchmeva Combo",
+                flavor: "Mix Peri Peri Snack 250g + Panchmeva 250g",
+                prices: {
+                    "2 x 250g": { listing: 780, selling: 709 },
+                },
+                images: ["/Images/Mix Periperi Front.jpeg"],
+                inStock: true,
+                keywords: "combo, peri peri, panchmeva, value pack",
+            },
+            {
+                name: "Pack of 2 Panchmeva",
+                flavor: "Panchmeva 250g x 2",
+                prices: {
+                    "2 x 250g": { listing: 780, selling: 699 },
+                },
+                images: ["/Images/9ab2aff8ca40244650e36d1fc3546628.jpg"],
+                inStock: true,
+                keywords: "combo, panchmeva, value pack, double pack",
             },
         ],
     },
@@ -98,6 +212,11 @@ const Shopping = () => {
     };
 
     const handleAddToCart = (item, selectedWeight) => {
+        if (!item.inStock) {
+            toast.error("This product is currently out of stock");
+            return;
+        }
+
         const user = JSON.parse(localStorage.getItem("user"));
 
         if (!user) {
@@ -106,10 +225,11 @@ const Shopping = () => {
             return;
         }
 
+        const priceData = item.prices[selectedWeight];
         const cartItem = {
             name: item.name,
             weight: selectedWeight,
-            price: item.prices[selectedWeight],
+            price: priceData.selling,
             image: item.images[0],
             quantity: 1,
         };
@@ -130,11 +250,15 @@ const Shopping = () => {
         return `${item.name} - ${item.flavor} flavored dry fruit by PranaBites - ${views[viewIndex] || `image ${viewIndex + 1}`}`;
     };
 
+    const getDiscountPercent = (listing, selling) => {
+        return Math.round(((listing - selling) / listing) * 100);
+    };
+
     return (
         <main className="py-5">
             <SEO
                 title="Shop Flavored Dry Fruits - Premium Almonds, Cashews, Pistachios"
-                description="Buy premium flavored dry fruits online at PranaBites. Choose from Coconut Almonds, Cheese Cashews, BBQ Almonds, Peri Peri Mix & more. Free delivery in Kolhapur!"
+                description="Buy premium flavored dry fruits online at PranaBites. Choose from Coconut Almonds, Cheese Cashews, Hing Jeera Almonds, Peri Peri Mix & more. Free delivery in Kolhapur!"
                 keywords="buy dry fruits online, flavored almonds, cashews online, pistachios, healthy snacks India, PranaBites shop, premium nuts"
                 canonicalUrl="https://pranabites.com/shop"
                 structuredData={generateProductListSchema(allProducts)}
@@ -167,25 +291,37 @@ const Shopping = () => {
                             {section.items.map((item, itemIndex) => (
                                 <Col md={4} sm={6} key={itemIndex} className="mb-4">
                                     <article className="h-100">
-                                        <Card className="border-0 shadow-sm h-100 product-card">
-                                            <Carousel
-                                                controls={false}
-                                                indicators={false}
-                                                interval={2500}
-                                            >
-                                                {item.images.map((img, imgIndex) => (
-                                                    <Carousel.Item key={imgIndex}>
-                                                        <img
-                                                            src={img}
-                                                            alt={generateAltText(item, imgIndex)}
-                                                            className="w-100 product-image"
-                                                            loading="lazy"
-                                                            width="400"
-                                                            height="400"
-                                                        />
-                                                    </Carousel.Item>
-                                                ))}
-                                            </Carousel>
+                                        <Card className={`border-0 shadow-sm h-100 product-card ${!item.inStock ? "opacity-75" : ""}`}>
+                                            <div className="position-relative">
+                                                <Carousel
+                                                    controls={false}
+                                                    indicators={false}
+                                                    interval={2500}
+                                                >
+                                                    {item.images.map((img, imgIndex) => (
+                                                        <Carousel.Item key={imgIndex}>
+                                                            <img
+                                                                src={img}
+                                                                alt={generateAltText(item, imgIndex)}
+                                                                className={`w-100 product-image ${!item.inStock ? "grayscale" : ""}`}
+                                                                loading="lazy"
+                                                                width="400"
+                                                                height="400"
+                                                                style={!item.inStock ? { filter: "grayscale(50%)" } : {}}
+                                                            />
+                                                        </Carousel.Item>
+                                                    ))}
+                                                </Carousel>
+                                                {!item.inStock && (
+                                                    <Badge
+                                                        bg="danger"
+                                                        className="position-absolute top-50 start-50 translate-middle px-3 py-2"
+                                                        style={{ fontSize: "0.9rem", zIndex: 2 }}
+                                                    >
+                                                        Out of Stock
+                                                    </Badge>
+                                                )}
+                                            </div>
 
                                             <Card.Body className="text-center">
                                                 <h3 className="h5 fw-semibold mb-1">
@@ -201,41 +337,51 @@ const Shopping = () => {
                                                 </div>
 
                                                 {/* Price Display */}
-                                                {Object.entries(item.prices).map(([weight, price]) => {
-                                                    const mrp = calculateMRP(price);
-                                                    return (
-                                                        <div
-                                                            key={weight}
-                                                            className="d-flex justify-content-between align-items-center mb-2 px-2"
-                                                        >
-                                                            <span className="text-muted">{weight}</span>
-                                                            <div className="text-end">
-                                                                <small className="text-muted text-decoration-line-through me-1">
-                                                                    ₹{mrp}
-                                                                </small>
-                                                                <span className="fw-bold text-success">₹{price}</span>
-                                                                <Badge bg="danger" className="ms-1" style={{ fontSize: "0.65rem" }}>
-                                                                    10% OFF
-                                                                </Badge>
-                                                            </div>
-                                                            <Button
-                                                                size="sm"
-                                                                variant="success"
-                                                                onClick={(e) => {
-                                                                    e.stopPropagation();
-                                                                    handleAddToCart(item, weight);
-                                                                }}
-                                                                aria-label={`Add ${item.name} ${weight} pack to cart for ₹${price}`}
+                                                {item.inStock ? (
+                                                    Object.entries(item.prices).map(([weight, priceData]) => {
+                                                        const discount = getDiscountPercent(priceData.listing, priceData.selling);
+                                                        return (
+                                                            <div
+                                                                key={weight}
+                                                                className="d-flex justify-content-between align-items-center mb-2 px-2"
                                                             >
-                                                                Add
-                                                            </Button>
-                                                        </div>
-                                                    );
-                                                })}
+                                                                <span className="text-muted">{weight}</span>
+                                                                <div className="text-end">
+                                                                    <small className="text-muted text-decoration-line-through me-1">
+                                                                        ₹{priceData.listing}
+                                                                    </small>
+                                                                    <span className="fw-bold text-success">₹{priceData.selling}</span>
+                                                                    {discount > 0 && (
+                                                                        <Badge bg="danger" className="ms-1" style={{ fontSize: "0.65rem" }}>
+                                                                            {discount}% OFF
+                                                                        </Badge>
+                                                                    )}
+                                                                </div>
+                                                                <Button
+                                                                    size="sm"
+                                                                    variant="success"
+                                                                    onClick={(e) => {
+                                                                        e.stopPropagation();
+                                                                        handleAddToCart(item, weight);
+                                                                    }}
+                                                                    aria-label={`Add ${item.name} ${weight} pack to cart for ₹${priceData.selling}`}
+                                                                >
+                                                                    Add
+                                                                </Button>
+                                                            </div>
+                                                        );
+                                                    })
+                                                ) : (
+                                                    <div className="mb-2">
+                                                        <Badge bg="secondary" className="px-3 py-2">
+                                                            Currently Unavailable
+                                                        </Badge>
+                                                    </div>
+                                                )}
 
                                                 {/* View Details Button */}
                                                 <Button
-                                                    variant="outline-success"
+                                                    variant={item.inStock ? "outline-success" : "outline-secondary"}
                                                     className="w-100 mt-2"
                                                     onClick={() => handleProductClick(item)}
                                                 >
