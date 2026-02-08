@@ -110,6 +110,11 @@
     color: #9ef0c1;
 }
 
+/* Dark Mode */
+body.dark-mode .footer {
+    background: linear-gradient(135deg, #0a2520, #0d3830);
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .footer {

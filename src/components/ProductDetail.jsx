@@ -25,7 +25,7 @@ const trustBadges = [
 ];
 
 // Product descriptions
-const productDescriptions = {
+export const productDescriptions = {
     "Almond Coco Dust": {
         description: "Premium California almonds coated with a delicate layer of coconut dust. A perfect blend of crunch and sweetness that makes for an irresistible healthy snack.",
         ingredients: "Almonds, Coconut, Sugar, Salt",

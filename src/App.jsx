@@ -13,6 +13,8 @@ import RefundPolicy from "./components/Pages/RefundPolicy.jsx";
 import NotFound from "./components/Pages/NotFound.jsx";
 import AdminLogin from "./components/Pages/AdminLogin.jsx";
 import AdminDashboard from "./components/Pages/AdminDashboard.jsx";
+import ProductComparison from "./components/Pages/ProductComparison.jsx";
+import BulkOrderForm from "./components/Pages/BulkOrderForm.jsx";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Footer from "./components/Pages/Footer.jsx";
 import { Toaster } from "react-hot-toast";
@@ -47,6 +49,8 @@ function App() {
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/faq" element={<FAQ />} />
                 <Route path="/cart" element={<Cart />} />
+                <Route path="/compare" element={<ProductComparison />} />
+                <Route path="/bulk-order" element={<BulkOrderForm />} />
                 <Route path="/login" element={<LoginRegister />} />
 
                 {/* Legal Pages */}

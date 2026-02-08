@@ -67,6 +67,21 @@
     margin-top: 20px;
 }
 
+/* Dark Mode */
+body.dark-mode .values-section {
+    background: var(--bg-secondary);
+}
+
+body.dark-mode .value-card {
+    background-color: var(--bg-card);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .mission-badge {
+    background: #78350f;
+    color: #fde68a;
+}
+
 .choose-us {
     background: linear-gradient(90deg, #b45309, #78350f);
     padding: 80px 0;

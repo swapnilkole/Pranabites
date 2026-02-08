@@ -56,6 +56,25 @@
     background-color: #f0fdf4;
 }
 
+/* Dark Mode */
+body.dark-mode .faq-hero {
+    background: linear-gradient(135deg, #92400e, #713c12);
+}
+
+body.dark-mode .faq-item {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .accordion-button:not(.collapsed) {
+    background-color: #2d1f0e;
+    color: #f59e0b;
+}
+
+body.dark-mode .quick-card {
+    background-color: var(--bg-card);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
 /* Quick Links */
 .quick-card {
     text-align: center;

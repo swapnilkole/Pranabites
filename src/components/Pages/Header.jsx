@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { Navbar, Nav, Container, Button, Badge } from "react-bootstrap";
 import { NavLink, Link, useNavigate } from "react-router-dom";
-import { FaShoppingCart, FaUser } from "react-icons/fa";
+import { FaShoppingCart, FaUser, FaMoon, FaSun } from "react-icons/fa";
 
 // Logo from public folder - use direct path for Vite
 const logo = "/Images/Logo1.jpg";
@@ -9,6 +9,7 @@ const logo = "/Images/Logo1.jpg";
 const Header = () => {
     const [user, setUser] = useState(null);
     const [cartCount, setCartCount] = useState(0);
+    const [darkMode, setDarkMode] = useState(() => localStorage.getItem("darkMode") === "true");
     const navigate = useNavigate();
 
     // Function to sync state with localStorage
@@ -49,13 +50,27 @@ const Header = () => {
         // Also sync on window focus (in case of external changes)
         window.addEventListener("focus", syncStateWithStorage);
 
+        const handleDarkModeUpdate = () => {
+            setDarkMode(localStorage.getItem("darkMode") === "true");
+        };
+        window.addEventListener("darkModeUpdated", handleDarkModeUpdate);
+
         return () => {
             window.removeEventListener("storage", handleStorageChange);
             window.removeEventListener("cartUpdated", handleCartUpdate);
             window.removeEventListener("userUpdated", handleUserUpdate);
             window.removeEventListener("focus", syncStateWithStorage);
+            window.removeEventListener("darkModeUpdated", handleDarkModeUpdate);
         };
     }, [syncStateWithStorage]);
+
+    const toggleDarkMode = () => {
+        const newMode = !darkMode;
+        setDarkMode(newMode);
+        localStorage.setItem("darkMode", newMode);
+        document.body.classList.toggle("dark-mode", newMode);
+        window.dispatchEvent(new Event("darkModeUpdated"));
+    };
 
     const handleLogout = () => {
         localStorage.removeItem("user");
@@ -66,7 +81,7 @@ const Header = () => {
     };
 
     return (
-        <Navbar bg="white" expand="lg" className="shadow-sm py-3">
+        <Navbar bg={darkMode ? "dark" : "white"} data-bs-theme={darkMode ? "dark" : "light"} expand="lg" className="shadow-sm py-3">
             <Container>
                 {/* Logo - Enhanced for brand prominence */}
                 <Navbar.Brand
@@ -109,11 +124,23 @@ const Header = () => {
                         <Nav.Link as={NavLink} to="/shop">Shop</Nav.Link>
                         <Nav.Link as={NavLink} to="/about">About</Nav.Link>
                         <Nav.Link as={NavLink} to="/contact">Contact</Nav.Link>
+                        <Nav.Link as={NavLink} to="/bulk-order">Bulk Orders</Nav.Link>
                         <Nav.Link as={NavLink} to="/faq">FAQ</Nav.Link>
                     </Nav>
 
-                    {/* Icons + Cart + Login/Logout */}
+                    {/* Icons + Dark Mode + Cart + Login/Logout */}
                     <div className="d-flex align-items-center gap-3">
+                        {/* Dark Mode Toggle */}
+                        <button
+                            type="button"
+                            className="dark-mode-toggle"
+                            onClick={toggleDarkMode}
+                            aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+                            title={darkMode ? "Light Mode" : "Dark Mode"}
+                        >
+                            {darkMode ? <FaSun size={16} color="#f59e0b" /> : <FaMoon size={16} />}
+                        </button>
+
                         {/* Shopping Cart Icon */}
                         <button
                             type="button"

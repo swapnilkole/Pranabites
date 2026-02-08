@@ -240,6 +240,47 @@ form .form-control:focus {
 }
 
 /* =========================
+   DARK MODE
+========================= */
+body.dark-mode .contact-hero {
+    background: linear-gradient(135deg, #072b1e, #0d4a36);
+}
+
+body.dark-mode .contact-card {
+    background: var(--bg-card);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .contact-card p {
+    color: var(--text-secondary);
+}
+
+body.dark-mode .card {
+    background-color: var(--bg-card);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode form label {
+    color: var(--text-primary);
+}
+
+body.dark-mode .order-box {
+    background: linear-gradient(135deg, #2d1f0e, #3d2b14);
+}
+
+body.dark-mode .order-box h4 {
+    color: #f59e0b;
+}
+
+body.dark-mode .order-box p {
+    color: #fde68a;
+}
+
+body.dark-mode .shadow-sm p {
+    color: var(--text-secondary);
+}
+
+/* =========================
    RESPONSIVE
 ========================= */
 @media (max-width: 768px) {

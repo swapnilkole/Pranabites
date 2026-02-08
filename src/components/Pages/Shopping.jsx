@@ -2,12 +2,12 @@ import { useState, useEffect } from "react";
 import { Container, Row, Col, Card, Button, Carousel, Badge } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import { FaEye } from "react-icons/fa";
+import { FaEye, FaExchangeAlt } from "react-icons/fa";
 import SEO, { generateProductListSchema } from "../SEO";
 import { StarDisplay } from "../ProductReviews";
 import ProductDetail from "../ProductDetail";
 
-const products = [
+export const products = [
     {
         category: "Almond",
         items: [
@@ -199,6 +199,9 @@ const Shopping = () => {
     const [cart, setCart] = useState([]);
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [showDetail, setShowDetail] = useState(false);
+    const [compareList, setCompareList] = useState(() => {
+        return JSON.parse(localStorage.getItem("compareList")) || [];
+    });
 
     useEffect(() => {
         const savedCart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -252,6 +255,23 @@ const Shopping = () => {
 
     const getDiscountPercent = (listing, selling) => {
         return Math.round(((listing - selling) / listing) * 100);
+    };
+
+    const toggleCompare = (productName) => {
+        setCompareList((prev) => {
+            let updated;
+            if (prev.includes(productName)) {
+                updated = prev.filter((n) => n !== productName);
+            } else {
+                if (prev.length >= 3) {
+                    toast.error("You can compare up to 3 products only");
+                    return prev;
+                }
+                updated = [...prev, productName];
+            }
+            localStorage.setItem("compareList", JSON.stringify(updated));
+            return updated;
+        });
     };
 
     return (
@@ -386,15 +406,28 @@ const Shopping = () => {
                                                     </div>
                                                 )}
 
-                                                {/* View Details Button */}
-                                                <Button
-                                                    variant={item.inStock ? "outline-success" : "outline-secondary"}
-                                                    className="w-100 mt-2"
-                                                    onClick={() => handleProductClick(item)}
-                                                >
-                                                    <FaEye className="me-2" />
-                                                    View Details
-                                                </Button>
+                                                {/* View Details & Compare */}
+                                                <div className="d-flex gap-2 mt-2">
+                                                    <Button
+                                                        variant={item.inStock ? "outline-success" : "outline-secondary"}
+                                                        className="flex-grow-1"
+                                                        onClick={() => handleProductClick(item)}
+                                                    >
+                                                        <FaEye className="me-2" />
+                                                        Details
+                                                    </Button>
+                                                    <Button
+                                                        variant={compareList.includes(item.name) ? "success" : "outline-secondary"}
+                                                        onClick={(e) => {
+                                                            e.stopPropagation();
+                                                            toggleCompare(item.name);
+                                                        }}
+                                                        title="Compare"
+                                                        aria-label={`Compare ${item.name}`}
+                                                    >
+                                                        <FaExchangeAlt />
+                                                    </Button>
+                                                </div>
                                             </Card.Body>
                                         </Card>
                                     </article>
@@ -417,6 +450,39 @@ const Shopping = () => {
                     </aside>
                 )}
             </Container>
+
+            {/* Floating Compare Bar */}
+            {compareList.length >= 2 && (
+                <div
+                    className="position-fixed bottom-0 start-0 end-0 bg-success text-white py-3 px-4 d-flex justify-content-between align-items-center"
+                    style={{ zIndex: 1050 }}
+                >
+                    <span className="fw-semibold">
+                        {compareList.length} products selected for comparison
+                    </span>
+                    <div className="d-flex gap-2">
+                        <Button
+                            variant="light"
+                            size="sm"
+                            className="fw-bold"
+                            onClick={() => navigate("/compare")}
+                        >
+                            <FaExchangeAlt className="me-2" />
+                            Compare Now
+                        </Button>
+                        <Button
+                            variant="outline-light"
+                            size="sm"
+                            onClick={() => {
+                                setCompareList([]);
+                                localStorage.removeItem("compareList");
+                            }}
+                        >
+                            Clear
+                        </Button>
+                    </div>
+                </div>
+            )}
 
             {/* Product Detail Modal */}
             <ProductDetail

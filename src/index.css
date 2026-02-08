@@ -1,9 +1,195 @@
+/* ===== Dark Mode CSS Variables ===== */
+:root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --bg-card: #ffffff;
+  --text-primary: #212529;
+  --text-secondary: #6c757d;
+  --text-muted: #6c757d;
+  --border-color: #dee2e6;
+  --shadow-color: rgba(0, 0, 0, 0.08);
+  --shadow-hover: rgba(0, 0, 0, 0.15);
+  --input-bg: #ffffff;
+  --input-border: #ced4da;
+}
+
+body.dark-mode {
+  --bg-primary: #1a1a2e;
+  --bg-secondary: #16213e;
+  --bg-card: #1e293b;
+  --text-primary: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --text-muted: #94a3b8;
+  --border-color: #334155;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --shadow-hover: rgba(0, 0, 0, 0.5);
+  --input-bg: #1e293b;
+  --input-border: #475569;
+  background-color: #0f172a;
+  color: #e2e8f0;
+}
+
+body.dark-mode .bg-light {
+  background-color: var(--bg-secondary) !important;
+}
+
+body.dark-mode .bg-white {
+  background-color: var(--bg-card) !important;
+}
+
+body.dark-mode .text-dark {
+  color: var(--text-primary) !important;
+}
+
+body.dark-mode .text-muted {
+  color: var(--text-secondary) !important;
+}
+
+body.dark-mode .card,
+body.dark-mode .modal-content {
+  background-color: var(--bg-card);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+body.dark-mode .modal-header {
+  border-color: var(--border-color);
+}
+
+body.dark-mode .form-control,
+body.dark-mode .form-select {
+  background-color: var(--input-bg);
+  color: var(--text-primary);
+  border-color: var(--input-border);
+}
+
+body.dark-mode .form-control::placeholder {
+  color: var(--text-secondary);
+}
+
+body.dark-mode .border {
+  border-color: var(--border-color) !important;
+}
+
+body.dark-mode .border-top,
+body.dark-mode .border-bottom {
+  border-color: var(--border-color) !important;
+}
+
+body.dark-mode .shadow-sm,
+body.dark-mode .shadow {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4) !important;
+}
+
+body.dark-mode .navbar {
+  background-color: var(--bg-card) !important;
+  border-bottom: 1px solid var(--border-color);
+}
+
+body.dark-mode .navbar .nav-link {
+  color: var(--text-primary) !important;
+}
+
+body.dark-mode .navbar .nav-link:hover,
+body.dark-mode .navbar .nav-link.active {
+  color: #22c55e !important;
+}
+
+body.dark-mode .dropdown-menu {
+  background-color: var(--bg-card);
+  border-color: var(--border-color);
+}
+
+body.dark-mode .accordion-item {
+  background-color: var(--bg-card);
+  border-color: var(--border-color);
+}
+
+body.dark-mode .accordion-button {
+  background-color: var(--bg-card);
+  color: var(--text-primary);
+}
+
+body.dark-mode .accordion-button:not(.collapsed) {
+  background-color: var(--bg-secondary);
+  color: #22c55e;
+}
+
+body.dark-mode .accordion-button::after {
+  filter: invert(1);
+}
+
+body.dark-mode .table {
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+body.dark-mode h1, body.dark-mode h2, body.dark-mode h3,
+body.dark-mode h4, body.dark-mode h5, body.dark-mode h6 {
+  color: var(--text-primary);
+}
+
+body.dark-mode p {
+  color: var(--text-secondary);
+}
+
+body.dark-mode .btn-close {
+  filter: invert(1);
+}
+
+body.dark-mode .navbar-toggler {
+  border-color: var(--border-color);
+}
+
+body.dark-mode .navbar-toggler-icon {
+  filter: invert(1);
+}
+
+body.dark-mode .offcanvas,
+body.dark-mode .offcanvas-header {
+  background-color: var(--bg-card);
+  color: var(--text-primary);
+}
+
 .auth-bg {
   background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
     url("https://i.pinimg.com/736x/10/44/65/10446544282e575e830d11a3a4c190e4.jpg");
   background-size: cover;
   background-position: center;
   border-radius: 10px 0 0 10px;
+}
+
+/* Dark mode toggle button */
+.dark-mode-toggle {
+  background: none;
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+.dark-mode-toggle:hover {
+  background-color: var(--bg-secondary);
+  transform: rotate(30deg);
+}
+
+body.dark-mode .product-card {
+  background-color: var(--bg-card);
+  box-shadow: 0 6px 18px var(--shadow-color);
+}
+
+body.dark-mode .product-card:hover {
+  box-shadow: 0 12px 28px var(--shadow-hover);
+}
+
+body.dark-mode .image-container {
+  background: var(--bg-secondary);
 }
 
 /* Product Card */
