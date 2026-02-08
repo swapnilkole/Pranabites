@@ -112,7 +112,23 @@
 
 /* Dark Mode */
 body.dark-mode .footer {
-    background: linear-gradient(135deg, #0a2520, #0d3830);
+    background: linear-gradient(135deg, #0a1f18, #0d2e22);
+}
+
+body.dark-mode .footer-brand {
+    color: #4ade80;
+}
+
+body.dark-mode .footer-tagline {
+    color: #86efac;
+}
+
+body.dark-mode .footer-title::after {
+    background: #4ade80;
+}
+
+body.dark-mode .footer-bottom span {
+    color: #4ade80;
 }
 
 /* Responsive */

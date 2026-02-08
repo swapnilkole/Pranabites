@@ -8,7 +8,7 @@ import SEO from "../SEO";
 const faqs = [
     {
         question: "What is the shelf life of your products?",
-        answer: "All our products have a shelf life of 6 months from the date of packaging. We ensure fresh packing and sealed packaging to maintain quality.",
+        answer: "All our products have a shelf life of 3 months from the date of packaging. We ensure fresh packing and sealed packaging to maintain quality.",
     },
     {
         question: "How do I place an order?",

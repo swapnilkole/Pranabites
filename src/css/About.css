@@ -68,18 +68,40 @@
 }
 
 /* Dark Mode */
+body.dark-mode .about-hero {
+    background: linear-gradient(90deg, #7c2d12, #5a1e08);
+}
+
 body.dark-mode .values-section {
-    background: var(--bg-secondary);
+    background: #121212;
 }
 
 body.dark-mode .value-card {
-    background-color: var(--bg-card);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    background-color: #1e1e1e;
+    border: 1px solid #2a2a2a;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode .value-card:hover {
+    border-color: #3a3a3a;
+}
+
+body.dark-mode .section-title {
+    color: #f0f0f0;
+}
+
+body.dark-mode .mission-text {
+    color: #c0c0c0;
 }
 
 body.dark-mode .mission-badge {
-    background: #78350f;
-    color: #fde68a;
+    background: #422006;
+    color: #fbbf24;
+    border: 1px solid #854d0e;
+}
+
+body.dark-mode .choose-us {
+    background: linear-gradient(90deg, #7c2d12, #5a1e08);
 }
 
 .choose-us {

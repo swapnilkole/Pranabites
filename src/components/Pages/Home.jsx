@@ -82,7 +82,7 @@ const benefits = [
     {
         icon: FaBox,
         title: "Fresh Packing",
-        description: "Sealed for freshness with 6-month shelf life",
+        description: "Sealed for freshness with 3-month shelf life",
         color: "text-primary",
     },
     {

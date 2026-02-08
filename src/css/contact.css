@@ -243,41 +243,71 @@ form .form-control:focus {
    DARK MODE
 ========================= */
 body.dark-mode .contact-hero {
-    background: linear-gradient(135deg, #072b1e, #0d4a36);
+    background: linear-gradient(135deg, #0a2e1f, #0d4030);
 }
 
 body.dark-mode .contact-card {
-    background: var(--bg-card);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    background: #1e1e1e;
+    border: 1px solid #2a2a2a;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode .contact-card:hover {
+    border-color: #3a3a3a;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .contact-card h5 {
+    color: #f0f0f0;
 }
 
 body.dark-mode .contact-card p {
-    color: var(--text-secondary);
+    color: #a0a0a0;
 }
 
 body.dark-mode .card {
-    background-color: var(--bg-card);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    background-color: #1e1e1e;
+    border: 1px solid #2a2a2a;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
 }
 
 body.dark-mode form label {
-    color: var(--text-primary);
+    color: #e0e0e0;
+}
+
+body.dark-mode form .form-control {
+    background-color: #262626;
+    border-color: #3a3a3a;
+    color: #f0f0f0;
 }
 
 body.dark-mode .order-box {
-    background: linear-gradient(135deg, #2d1f0e, #3d2b14);
+    background: linear-gradient(135deg, #1c1508, #2a1e0c);
+    border: 1px solid #3d2b14;
 }
 
 body.dark-mode .order-box h4 {
-    color: #f59e0b;
+    color: #fbbf24;
 }
 
 body.dark-mode .order-box p {
-    color: #fde68a;
+    color: #d4a456;
 }
 
 body.dark-mode .shadow-sm p {
-    color: var(--text-secondary);
+    color: #a0a0a0;
+}
+
+body.dark-mode .whatsapp {
+    background: #162b1f;
+}
+
+body.dark-mode .instagram {
+    background: #2a1520;
+}
+
+body.dark-mode .location {
+    background: #151a2e;
 }
 
 /* =========================

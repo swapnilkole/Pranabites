@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 /**
  * SEO Component - Updates document head for each page
- * Supports title, description, keywords, and structured data
+ * Supports title, description, keywords, OG, Twitter, canonical, structured data
  */
 const SEO = ({
     title,
@@ -10,7 +10,9 @@ const SEO = ({
     keywords,
     canonicalUrl,
     ogImage = "/Images/logo1.jpg",
+    ogType = "website",
     structuredData,
+    noIndex = false,
 }) => {
     const siteName = "PranaBites";
     const baseUrl = "https://pranabites.com";
@@ -33,20 +35,24 @@ const SEO = ({
             meta.setAttribute("content", content);
         };
 
-        // Update meta tags
+        // Basic meta tags
         updateMeta("description", description);
         updateMeta("keywords", keywords);
+        updateMeta("robots", noIndex ? "noindex, nofollow" : "index, follow");
 
         // Open Graph tags
         updateMeta("og:title", fullTitle, true);
         updateMeta("og:description", description, true);
         updateMeta("og:image", ogImage.startsWith("http") ? ogImage : `${baseUrl}${ogImage}`, true);
         updateMeta("og:url", canonicalUrl || baseUrl, true);
+        updateMeta("og:type", ogType, true);
+        updateMeta("og:site_name", siteName, true);
 
-        // Twitter tags
-        updateMeta("twitter:title", fullTitle, true);
-        updateMeta("twitter:description", description, true);
-        updateMeta("twitter:image", ogImage.startsWith("http") ? ogImage : `${baseUrl}${ogImage}`, true);
+        // Twitter tags (use name attribute per Twitter spec)
+        updateMeta("twitter:card", "summary_large_image");
+        updateMeta("twitter:title", fullTitle);
+        updateMeta("twitter:description", description);
+        updateMeta("twitter:image", ogImage.startsWith("http") ? ogImage : `${baseUrl}${ogImage}`);
 
         // Update canonical link
         if (canonicalUrl) {
@@ -78,7 +84,7 @@ const SEO = ({
                 structuredScript.remove();
             }
         };
-    }, [fullTitle, description, keywords, canonicalUrl, ogImage, structuredData]);
+    }, [fullTitle, description, keywords, canonicalUrl, ogImage, ogType, structuredData, noIndex]);
 
     return null;
 };
@@ -91,6 +97,7 @@ export const generateOrganizationSchema = () => ({
     url: "https://pranabites.com",
     logo: "https://pranabites.com/Images/logo1.jpg",
     description: "Premium flavored dry fruits from Kolhapur, Maharashtra",
+    foundingLocation: "Kolhapur, Maharashtra, India",
     address: {
         "@type": "PostalAddress",
         addressLocality: "Kolhapur",
@@ -112,32 +119,44 @@ export const generateProductListSchema = (products) => ({
     name: "PranaBites Dry Fruits Collection",
     description: "Premium flavored dry fruits - almonds, cashews, pistachios, raisins",
     numberOfItems: products.length,
-    itemListElement: products.map((product, index) => ({
-        "@type": "ListItem",
-        position: index + 1,
-        item: {
-            "@type": "Product",
-            name: product.name,
-            description: `Premium ${product.name} - Flavored dry fruit snack`,
-            image: `https://pranabites.com${product.images?.[0] || product.image}`,
-            brand: {
-                "@type": "Brand",
-                name: "PranaBites",
-            },
-            offers: {
-                "@type": "Offer",
-                priceCurrency: "INR",
-                price: typeof product.prices === "object"
-                    ? Object.values(product.prices)[0]
-                    : product.price?.replace("₹", "") || "0",
-                availability: "https://schema.org/InStock",
-                seller: {
-                    "@type": "Organization",
+    itemListElement: products.map((product, index) => {
+        // Extract price from the prices object (selling price of first weight)
+        let price = "0";
+        if (product.prices && typeof product.prices === "object") {
+            const firstWeight = Object.keys(product.prices)[0];
+            if (firstWeight) {
+                const priceObj = product.prices[firstWeight];
+                price = String(priceObj?.selling || priceObj?.listing || priceObj || "0");
+            }
+        }
+
+        return {
+            "@type": "ListItem",
+            position: index + 1,
+            item: {
+                "@type": "Product",
+                name: product.name,
+                description: `Premium ${product.name} - ${product.flavor || "Flavored dry fruit snack"}`,
+                image: `https://pranabites.com${product.images?.[0] || product.image}`,
+                brand: {
+                    "@type": "Brand",
                     name: "PranaBites",
                 },
+                offers: {
+                    "@type": "Offer",
+                    priceCurrency: "INR",
+                    price: price,
+                    availability: product.inStock === false
+                        ? "https://schema.org/OutOfStock"
+                        : "https://schema.org/InStock",
+                    seller: {
+                        "@type": "Organization",
+                        name: "PranaBites",
+                    },
+                },
             },
-        },
-    })),
+        };
+    }),
 });
 
 export const generateBreadcrumbSchema = (items) => ({
@@ -181,6 +200,32 @@ export const generateLocalBusinessSchema = () => ({
         },
     ],
     priceRange: "₹250-₹500",
+});
+
+export const generateFAQSchema = (faqItems) => ({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqItems.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: {
+            "@type": "Answer",
+            text: item.answer,
+        },
+    })),
+});
+
+export const generateWebPageSchema = (name, description, url) => ({
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name,
+    description,
+    url,
+    publisher: {
+        "@type": "Organization",
+        name: "PranaBites",
+        logo: "https://pranabites.com/Images/logo1.jpg",
+    },
 });
 
 export default SEO;

@@ -58,21 +58,33 @@
 
 /* Dark Mode */
 body.dark-mode .faq-hero {
-    background: linear-gradient(135deg, #92400e, #713c12);
+    background: linear-gradient(135deg, #7c2d12, #5a2108);
 }
 
 body.dark-mode .faq-item {
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    background-color: #1e1e1e;
+    border: 1px solid #2a2a2a;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
 }
 
-body.dark-mode .accordion-button:not(.collapsed) {
-    background-color: #2d1f0e;
-    color: #f59e0b;
+body.dark-mode .faq-item .accordion-button:not(.collapsed) {
+    background-color: #2a1a08;
+    color: #fbbf24;
+}
+
+body.dark-mode .faq-whatsapp {
+    background: linear-gradient(135deg, #14532d, #166534);
 }
 
 body.dark-mode .quick-card {
-    background-color: var(--bg-card);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    background-color: #1e1e1e;
+    border: 1px solid #2a2a2a;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode .quick-card:hover {
+    border-color: #3a3a3a;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
 }
 
 /* Quick Links */

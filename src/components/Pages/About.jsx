@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import { FaHeart, FaBullseye, FaAward, FaUsers, FaWhatsapp } from "react-icons/fa";
 import "../../css/About.css";
-import SEO from "../SEO";
+import SEO, { generateOrganizationSchema } from "../SEO";
 
 const values = [
     {
@@ -39,6 +39,7 @@ const About = () => {
                 description="Learn about PranaBites - Kolhapur's premium flavored dry fruits brand. Our story, values, and commitment to healthy snacking with 100% vegetarian products."
                 keywords="about PranaBites, dry fruits Kolhapur, healthy snacks company, vegetarian snacks brand, flavored nuts India"
                 canonicalUrl="https://pranabites.com/about"
+                structuredData={generateOrganizationSchema()}
             />
 
             {/* Hero Section */}
@@ -133,7 +134,7 @@ const About = () => {
                             <p>Vegetarian Products</p>
                         </Col>
                         <Col md={4} className="mb-3">
-                            <p className="display-4 fw-bold mb-0">6 Months</p>
+                            <p className="display-4 fw-bold mb-0">3 Months</p>
                             <p>Shelf Life Guarantee</p>
                         </Col>
                         <Col md={4} className="mb-3">

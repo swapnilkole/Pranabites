@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { Navbar, Nav, Container, Button, Badge } from "react-bootstrap";
 import { NavLink, Link, useNavigate } from "react-router-dom";
-import { FaShoppingCart, FaUser, FaMoon, FaSun } from "react-icons/fa";
+import { FaShoppingCart, FaUser, FaMoon, FaSun, FaTruck } from "react-icons/fa";
 
 // Logo from public folder - use direct path for Vite
 const logo = "/Images/Logo1.jpg";
@@ -81,7 +81,20 @@ const Header = () => {
     };
 
     return (
-        <Navbar bg={darkMode ? "dark" : "white"} data-bs-theme={darkMode ? "dark" : "light"} expand="lg" className="shadow-sm py-3">
+        <>
+        {/* Announcement Bar */}
+        <div className="announcement-bar text-center py-2" style={{
+            background: "linear-gradient(90deg, #198754, #145c43)",
+            color: "#fff",
+            fontSize: "0.85rem",
+            fontWeight: 600,
+            letterSpacing: "0.5px",
+        }}>
+            <FaTruck className="me-2" size={14} />
+            Free Delivery on Orders Above ₹1499
+        </div>
+
+        <Navbar bg={darkMode ? "dark" : "white"} data-bs-theme={darkMode ? "dark" : "light"} expand="lg" className="shadow-sm py-3 sticky-top">
             <Container>
                 {/* Logo - Enhanced for brand prominence */}
                 <Navbar.Brand
@@ -124,7 +137,7 @@ const Header = () => {
                         <Nav.Link as={NavLink} to="/shop">Shop</Nav.Link>
                         <Nav.Link as={NavLink} to="/about">About</Nav.Link>
                         <Nav.Link as={NavLink} to="/contact">Contact</Nav.Link>
-                        <Nav.Link as={NavLink} to="/bulk-order">Bulk Orders</Nav.Link>
+                        <Nav.Link as={NavLink} to="/bulk-order">Gifting</Nav.Link>
                         <Nav.Link as={NavLink} to="/faq">FAQ</Nav.Link>
                     </Nav>
 
@@ -189,6 +202,7 @@ const Header = () => {
                 </Navbar.Collapse>
             </Container>
         </Navbar>
+        </>
     );
 };
 

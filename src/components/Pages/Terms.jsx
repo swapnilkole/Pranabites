@@ -71,7 +71,7 @@ const Terms = () => {
                     <section className="mb-4">
                         <h2 className="h4">6. Product Quality</h2>
                         <ul>
-                            <li>All products have a shelf life of 6 months from the date of packaging.</li>
+                            <li>All products have a shelf life of 3 months from the date of packaging.</li>
                             <li>Products are 100% vegetarian and made with natural ingredients.</li>
                             <li>Store in a cool, dry place to maintain freshness.</li>
                         </ul>

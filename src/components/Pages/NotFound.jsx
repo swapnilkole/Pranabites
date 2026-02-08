@@ -9,7 +9,8 @@ const NotFound = () => {
             <SEO
                 title="Page Not Found (404)"
                 description="The page you're looking for doesn't exist. Browse our premium flavored dry fruits collection at PranaBites."
-                canonicalUrl="https://pranabites.com/404"
+                keywords="404, page not found, PranaBites"
+                noIndex={true}
             />
 
             <Container className="text-center">
