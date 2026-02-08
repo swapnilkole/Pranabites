@@ -18,7 +18,7 @@ const products = [
                     "100g": { listing: 175, selling: 155 },
                     "250g": { listing: 390, selling: 350 },
                 },
-                images: ["/Images/Almond Coco Dust Front.jpeg", "/Images/cocodust.jpg"],
+                images: ["/Images/cocodust.jpg", "/Images/Almond Coco Dust Front.jpeg", "/Images/fssai.png"],
                 inStock: true,
                 keywords: "almonds, badam, coconut, cocodust, healthy snack",
             },
@@ -29,7 +29,7 @@ const products = [
                     "100g": { listing: 200, selling: 177 },
                     "250g": { listing: 450, selling: 400 },
                 },
-                images: ["/Images/Almond Hing Jeera Front.jpeg", "/Images/almond hing jeera.jpg"],
+                images: ["/Images/almond hing jeera.jpg", "/Images/Almond Hing Jeera Front.jpeg", "/Images/fssai.png"],
                 inStock: true,
                 keywords: "almonds, badam, hing, jeera, spicy, savory",
             },
@@ -37,7 +37,7 @@ const products = [
                 name: "American Almond",
                 flavor: "Classic Premium",
                 prices: {},
-                images: ["/Images/Almond Front.jpeg", "/Images/Almonds.jpg"],
+                images: ["/Images/Almond Front.jpeg", "/Images/Almonds.jpg", "/Images/fssai.png"],
                 inStock: false,
                 keywords: "almonds, american, premium, plain",
             },
@@ -53,7 +53,7 @@ const products = [
                     "100g": { listing: 205, selling: 185 },
                     "250g": { listing: 470, selling: 419 },
                 },
-                images: ["/Images/Cashew Chesse & Herbs Front.jpeg", "/Images/cashew cheese & herb.jpg"],
+                images: ["/Images/cashew cheese & herb.jpg", "/Images/Cashew Chesse & Herbs Front.jpeg", "/Images/fssai.png"],
                 inStock: true,
                 keywords: "cashews, kaju, cheese, herbs, savory snack",
             },
@@ -64,7 +64,7 @@ const products = [
                     "100g": { listing: 190, selling: 165 },
                     "250g": { listing: 400, selling: 359 },
                 },
-                images: ["/Images/Cashew Front.jpeg", "/Images/simpl cash.jpg"],
+                images: ["/Images/cashew.jpg", "/Images/Cashew Front.jpeg", "/Images/fssai.png"],
                 inStock: true,
                 keywords: "cashews, kaju, kokan, roasted, premium",
             },
@@ -80,7 +80,7 @@ const products = [
                     "100g": { listing: 145, selling: 128 },
                     "250g": { listing: 325, selling: 288 },
                 },
-                images: ["/Images/Choculate Raisin Milk Front.jpeg", "/Images/Milk Rais.jpg"],
+                images: ["/Images/rasine milk.jpg", "/Images/Choculate Raisin Milk Front.jpeg", "/Images/fssai.png"],
                 inStock: true,
                 keywords: "raisins, kishmish, chocolate, milk, sweet",
             },
@@ -88,7 +88,7 @@ const products = [
                 name: "Raisin Normal",
                 flavor: "Classic Green Raisin",
                 prices: {},
-                images: ["/Images/raisins.jpg"],
+                images: ["/Images/raisins.jpg", "/Images/fssai.png"],
                 inStock: false,
                 keywords: "raisins, kishmish, green, normal",
             },
@@ -96,7 +96,7 @@ const products = [
                 name: "Raisin Black",
                 flavor: "Premium Black Raisin",
                 prices: {},
-                images: ["/Images/raisins.jpg"],
+                images: ["/Images/raisins.jpg", "/Images/fssai.png"],
                 inStock: false,
                 keywords: "raisins, kishmish, black, premium",
             },
@@ -112,7 +112,7 @@ const products = [
                     "100g": { listing: 210, selling: 185 },
                     "250g": { listing: 460, selling: 409 },
                 },
-                images: ["/Images/Pista Front.jpeg", "/Images/pista.jpg"],
+                images: ["/Images/pistaaa.jpg", "/Images/Pista Front.jpeg", "/Images/fssai.png"],
                 inStock: true,
                 keywords: "pistachios, pista, salted, premium nuts",
             },
@@ -128,7 +128,7 @@ const products = [
                     "100g": { listing: 170, selling: 149 },
                     "250g": { listing: 370, selling: 329 },
                 },
-                images: ["/Images/Mix Periperi Front.jpeg", "/Images/mix peri.jpg"],
+                images: ["/Images/snack peri peri.jpg", "/Images/Mix Periperi Front.jpeg", "/Images/fssai.png"],
                 inStock: true,
                 keywords: "snack mix, peri peri, spicy, mixed nuts",
             },
@@ -143,7 +143,7 @@ const products = [
                 prices: {
                     "250g": { listing: 390, selling: 359 },
                 },
-                images: ["/Images/9ab2aff8ca40244650e36d1fc3546628.jpg"],
+                images: ["/Images/Register2.jpg", "/Images/fssai.png"],
                 inStock: true,
                 keywords: "panchmeva, dry fruit mix, traditional, pooja",
             },
@@ -158,7 +158,7 @@ const products = [
                 prices: {
                     "5 x 50g": { listing: 520, selling: 465 },
                 },
-                images: ["/Images/Almond Coco Dust Front.jpeg", "/Images/Mix Periperi Front.jpeg"],
+                images: ["/Images/cocodust.jpg", "/Images/snack peri peri.jpg", "/Images/fssai.png"],
                 inStock: true,
                 keywords: "trail pack, combo, sampler, variety pack",
             },
@@ -168,7 +168,7 @@ const products = [
                 prices: {
                     "2 x 250g": { listing: 780, selling: 709 },
                 },
-                images: ["/Images/Mix Periperi Front.jpeg"],
+                images: ["/Images/snack peri peri.jpg", "/Images/Register2.jpg", "/Images/fssai.png"],
                 inStock: true,
                 keywords: "combo, peri peri, panchmeva, value pack",
             },
@@ -178,7 +178,7 @@ const products = [
                 prices: {
                     "2 x 250g": { listing: 780, selling: 699 },
                 },
-                images: ["/Images/9ab2aff8ca40244650e36d1fc3546628.jpg"],
+                images: ["/Images/Register2.jpg", "/Images/fssai.png"],
                 inStock: true,
                 keywords: "combo, panchmeva, value pack, double pack",
             },
@@ -300,15 +300,22 @@ const Shopping = () => {
                                                 >
                                                     {item.images.map((img, imgIndex) => (
                                                         <Carousel.Item key={imgIndex}>
-                                                            <img
-                                                                src={img}
-                                                                alt={generateAltText(item, imgIndex)}
-                                                                className={`w-100 product-image ${!item.inStock ? "grayscale" : ""}`}
-                                                                loading="lazy"
-                                                                width="400"
-                                                                height="400"
-                                                                style={!item.inStock ? { filter: "grayscale(50%)" } : {}}
-                                                            />
+                                                            <div
+                                                                className="d-flex align-items-center justify-content-center bg-white"
+                                                                style={{ height: "300px", padding: "10px" }}
+                                                            >
+                                                                <img
+                                                                    src={img}
+                                                                    alt={generateAltText(item, imgIndex)}
+                                                                    loading="lazy"
+                                                                    style={{
+                                                                        maxWidth: "100%",
+                                                                        maxHeight: "280px",
+                                                                        objectFit: "contain",
+                                                                        ...(!item.inStock ? { filter: "grayscale(50%)" } : {}),
+                                                                    }}
+                                                                />
+                                                            </div>
                                                         </Carousel.Item>
                                                     ))}
                                                 </Carousel>

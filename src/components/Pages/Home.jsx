@@ -21,7 +21,7 @@ const featuredProducts = [
         listingPrice: 175,
         sellingPrice: 155,
         weight: "100g",
-        image: "/Images/Almond Coco Dust Front.jpeg",
+        image: "/Images/cocodust.jpg",
     },
     {
         id: 2,
@@ -30,7 +30,7 @@ const featuredProducts = [
         listingPrice: 205,
         sellingPrice: 185,
         weight: "100g",
-        image: "/Images/Cashew Chesse & Herbs Front.jpeg",
+        image: "/Images/cashew cheese & herb.jpg",
     },
     {
         id: 3,
@@ -39,7 +39,7 @@ const featuredProducts = [
         listingPrice: 170,
         sellingPrice: 149,
         weight: "100g",
-        image: "/Images/Mix Periperi Front.jpeg",
+        image: "/Images/snack peri peri.jpg",
     },
 ];
 
@@ -125,14 +125,14 @@ export default function Home() {
                                             Bestseller
                                         </span>
 
-                                        <div className="p-3 bg-light">
+                                        <div className="d-flex align-items-center justify-content-center bg-light rounded-top" style={{ height: "280px", padding: "15px" }}>
                                             <Card.Img
                                                 variant="top"
                                                 src={product.image}
                                                 alt={`${product.name} - ${product.flavor} flavored dry fruit by PranaBites`}
                                                 loading="lazy"
                                                 className="rounded"
-                                                style={{ height: "250px", objectFit: "cover" }}
+                                                style={{ maxHeight: "250px", maxWidth: "100%", objectFit: "contain" }}
                                             />
                                         </div>
 
